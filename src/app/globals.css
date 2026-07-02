@@ -1,26 +1,15 @@
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --color-primary: #10b981; /* Green */
-  --color-secondary: #8b5cf6; /* Purple */
-  --color-accent: #059669; /* Darker Green for hover */
-  --color-black: #000000;
+  --background: #090e17; /* Dark navy background from screenshot */
+  --foreground: #ffffff;
+  --color-primary: #f97316; /* Bright orange */
+  --color-accent: #ea580c; /* Darker orange for hover */
+  --color-dark: #0f172a; 
   --color-white: #ffffff;
-  --color-gray: #4b5563; /* Darker gray for better visibility in light mode */
-  --color-border: #e5e7eb;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #030303; /* Pitch black/very dark */
-    --foreground: #ffffff;
-    --color-primary: #34d399; /* Lighter Green for dark mode */
-    --color-secondary: #a78bfa; /* Lighter Purple for dark mode */
-    --color-accent: #10b981; 
-    --color-black: #000000;
-    --color-gray: #9ca3af; /* Lighter gray for better visibility in dark mode */
-    --color-border: #1f2937;
-  }
+  --color-gray: #9ca3af;
+  --color-gray-light: #e5e7eb;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --section-light-bg: #ffffff;
+  --section-light-fg: #111827;
 }
 
 html {
@@ -43,7 +32,6 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -57,12 +45,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 /* Utilities */
 .container {
   max-width: 1300px;
@@ -70,25 +52,13 @@ a {
   padding: 0 2rem;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+.text-orange {
+  color: var(--color-primary);
 }
 
-@media (prefers-color-scheme: light) {
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
-  }
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Light Section for Services */
+.light-section {
+  background: var(--section-light-bg);
+  color: var(--section-light-fg);
+  padding: 6rem 0;
 }
