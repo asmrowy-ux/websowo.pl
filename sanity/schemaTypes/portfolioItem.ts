@@ -11,6 +11,13 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'showOnHomepage',
+      title: 'Pokazuj na stronie głównej',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Zaznacz, jeśli chcesz by ten projekt wyświetlał się jako wyróżniony na stronie głównej.',
+    }),
+    defineField({
       name: 'client',
       title: 'Klient',
       type: 'string',

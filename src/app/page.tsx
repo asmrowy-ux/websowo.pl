@@ -24,7 +24,7 @@ export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function Home() {
   // Fetch data from Sanity
-  const portfolioItems = await client.fetch(`*[_type == "portfolioItem"] | order(_createdAt desc)`)
+  const portfolioItems = await client.fetch(`*[_type == "portfolioItem" && showOnHomepage == true] | order(_createdAt desc)`)
   const pricingDataList = await client.fetch(`*[_type == "pricingSection"]`)
   const pricingData = pricingDataList.length > 0 ? pricingDataList[0] : null
   

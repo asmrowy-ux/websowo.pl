@@ -19,30 +19,34 @@ const placeholderItems: PortfolioItem[] = [
   { _id: '3', title: 'Strona Korporacyjna', client: 'Nova Solutions', description: 'Elegancka witryna B2B z panelem CMS.', tags: ['Gatsby', 'Contentful', 'GraphQL'] },
 ]
 
-export default function PortfolioSection({ items = [] }: { items?: PortfolioItem[] }) {
+export default function PortfolioSection({ items = [], isMainPage = true }: { items?: PortfolioItem[], isMainPage?: boolean }) {
   const displayItems = items.length > 0 ? items : placeholderItems
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null)
 
   return (
     <>
-      <div id="portfolio" className="container" style={{ textAlign: 'center', paddingTop: '6rem', paddingBottom: '2rem' }}>
+      <div id="portfolio" className={isMainPage ? "container" : ""} style={{ textAlign: 'center', paddingTop: isMainPage ? '6rem' : '0', paddingBottom: '2rem' }}>
         <AnimatedSection>
-          <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-            Nasze Realizacje
-          </span>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, marginTop: '1rem', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-            Projekty, z których jesteśmy dumni
-          </h2>
-          <p style={{ color: 'var(--color-gray)', fontSize: '1.1rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
-            Wybrane projekty, które zrewolucjonizowały biznes naszych klientów.
-          </p>
+          {isMainPage && (
+            <>
+              <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                Nasze Realizacje
+              </span>
+              <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, marginTop: '1rem', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
+                Projekty, z których jesteśmy dumni
+              </h2>
+              <p style={{ color: 'var(--color-gray)', fontSize: '1.1rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
+                Wybrane projekty, które zrewolucjonizowały biznes naszych klientów.
+              </p>
+            </>
+          )}
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {displayItems.slice(0, 3).map((item, index) => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2.5rem' }}>
+            {(isMainPage ? displayItems.slice(0, 3) : displayItems).map((item, index) => (
               <AnimatedSection key={item._id} delay={index * 0.1}>
                 <motion.div 
                   style={{ 
-                    height: '300px', 
+                    height: '350px', 
                     borderRadius: '24px', 
                     display: 'flex', 
                     flexDirection: 'column',
@@ -63,22 +67,24 @@ export default function PortfolioSection({ items = [] }: { items?: PortfolioItem
             ))}
           </div>
           
-          <div style={{ marginTop: '4rem' }}>
-            <Link href="/realizacje" style={{ 
-              background: 'transparent', 
-              color: 'var(--color-primary)', 
-              padding: '1rem 2.5rem', 
-              borderRadius: '8px', 
-              fontSize: '1.05rem', 
-              fontWeight: 600,
-              border: '1px solid var(--color-primary)',
-              cursor: 'pointer',
-              display: 'inline-block',
-              transition: 'all 0.3s ease'
-            }}>
-              Zobacz wszystkie realizacje
-            </Link>
-          </div>
+          {isMainPage && (
+            <div style={{ marginTop: '4rem' }}>
+              <Link href="/realizacje" style={{ 
+                background: 'transparent', 
+                color: 'var(--color-primary)', 
+                padding: '1rem 2.5rem', 
+                borderRadius: '8px', 
+                fontSize: '1.05rem', 
+                fontWeight: 600,
+                border: '1px solid var(--color-primary)',
+                cursor: 'pointer',
+                display: 'inline-block',
+                transition: 'all 0.3s ease'
+              }}>
+                Zobacz wszystkie realizacje
+              </Link>
+            </div>
+          )}
         </AnimatedSection>
       </div>
 
