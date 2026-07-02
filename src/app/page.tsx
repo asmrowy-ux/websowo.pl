@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero'
 import AnimatedSection from '@/components/AnimatedSection'
+import FeatureCard from '@/components/FeatureCard'
 
 export default function Home() {
   return (
@@ -38,30 +39,7 @@ export default function Home() {
             }
           ].map((feature, i) => (
             <AnimatedSection key={i} delay={i * 0.15}>
-              <div 
-                className="glass" 
-                style={{ 
-                  padding: '3rem 2.5rem', 
-                  borderRadius: '24px',
-                  height: '100%',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)'
-                  e.currentTarget.style.boxShadow = `0 20px 40px -10px ${feature.color}33`
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = ''
-                }}
-              >
-                <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: `${feature.color}22`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: feature.color }}></div>
-                </div>
-                <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontWeight: 700 }}>{feature.title}</h3>
-                <p style={{ color: 'var(--color-gray)', fontSize: '1.1rem', lineHeight: 1.6 }}>{feature.desc}</p>
-              </div>
+              <FeatureCard feature={feature} />
             </AnimatedSection>
           ))}
         </div>
