@@ -1,7 +1,7 @@
 import AnimatedSection from '@/components/AnimatedSection'
 import Link from 'next/link'
 import PortfolioSection from '@/components/PortfolioSection'
-import { client } from '../../sanity/lib/client'
+import { client } from '../../../sanity/lib/client'
 
 export const revalidate = 60
 
