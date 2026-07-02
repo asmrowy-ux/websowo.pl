@@ -2,6 +2,9 @@ import Hero from '@/components/Hero'
 import AnimatedSection from '@/components/AnimatedSection'
 import FeatureCard from '@/components/FeatureCard'
 import Link from 'next/link'
+import PortfolioSection from '@/components/PortfolioSection'
+import PricingSection from '@/components/PricingSection'
+import { client } from '../../sanity/lib/client'
 
 // Simple SVG Icons
 const GlobeIcon = () => (
@@ -17,7 +20,17 @@ const SocialIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
 )
 
-export default function Home() {
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function Home() {
+  // Fetch data from Sanity
+  const portfolioItems = await client.fetch(`*[_type == "portfolioItem"] | order(_createdAt desc)`)
+  const pricingDataList = await client.fetch(`*[_type == "pricingSection"]`)
+  const pricingData = pricingDataList.length > 0 ? pricingDataList[0] : null
+  
+  // We can fetch Hero and Services data here in the same way, but keeping it simple for now
+  // with fallback hardcoded data inside the components if Sanity returns empty.
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Hero />
@@ -65,78 +78,9 @@ export default function Home() {
         </AnimatedSection>
       </section>
       
-      <div id="portfolio" className="container" style={{ textAlign: 'center', paddingTop: '6rem', paddingBottom: '2rem' }}>
-        <AnimatedSection>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-            Nasze Realizacje
-          </h2>
-          <p style={{ color: 'var(--color-gray)', fontSize: '1.1rem', marginBottom: '4rem' }}>
-            Wybrane projekty, które zrewolucjonizowały biznes naszych klientów.
-          </p>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {[1, 2, 3].map((item) => (
-              <div key={item} style={{ height: '300px', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: 'var(--color-gray)' }}>
-                Projekt {item}
-              </div>
-            ))}
-          </div>
-          
-          <div style={{ marginTop: '4rem' }}>
-            <Link href="/realizacje" style={{ 
-              background: 'transparent', 
-              color: 'var(--color-primary)', 
-              padding: '1rem 2.5rem', 
-              borderRadius: '8px', 
-              fontSize: '1.05rem', 
-              fontWeight: 600,
-              border: '1px solid var(--color-primary)',
-              cursor: 'pointer',
-              display: 'inline-block',
-              transition: 'all 0.3s ease'
-            }}>
-              Zobacz wszystkie realizacje
-            </Link>
-          </div>
-        </AnimatedSection>
-      </div>
+      <PortfolioSection items={portfolioItems} />
 
-      <div id="kontakt">
-        <AnimatedSection className="container" style={{ paddingBottom: '6rem' }}>
-          <div style={{ 
-            padding: '6rem 2rem', 
-            borderRadius: '32px', 
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden',
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)'
-          }}>
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, marginBottom: '2rem' }}>
-                Gotowy na zmianę?
-              </h2>
-              <p style={{ color: 'var(--color-gray)', fontSize: '1.25rem', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto' }}>
-                Przejdź na wyższy poziom z innowacyjną stroną i autorskim CMS. 
-              </p>
-              <Link href="mailto:kontakt@websowo.pl" style={{ 
-                background: 'var(--color-primary)', 
-                color: '#fff', 
-                padding: '1.25rem 3rem', 
-                borderRadius: '8px', 
-                fontSize: '1.1rem', 
-                fontWeight: 700,
-                border: 'none',
-                cursor: 'pointer',
-                display: 'inline-block',
-                transition: 'all 0.3s ease'
-              }}>
-                Skontaktuj się z nami
-              </Link>
-            </div>
-          </div>
-        </AnimatedSection>
-      </div>
+      <PricingSection data={pricingData} />
 
     </div>
   )

@@ -116,23 +116,14 @@
   max-width: 700px;
 }
 
-.imageWrapper::after {
-  content: '';
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  right: -10%;
-  bottom: -10%;
-  background: radial-gradient(ellipse at center, transparent 40%, var(--background) 70%);
-  z-index: 3;
-  pointer-events: none;
-}
-
 .mockupImage {
   width: 100%;
   height: auto;
   position: relative;
   z-index: 2;
+  /* Zastosowanie gradientowej maski zanikającej na brzegach */
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%);
 }
 
 .glow {
