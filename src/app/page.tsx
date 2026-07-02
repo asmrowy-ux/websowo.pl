@@ -81,6 +81,23 @@ export default function Home() {
               </div>
             ))}
           </div>
+          
+          <div style={{ marginTop: '4rem' }}>
+            <Link href="/realizacje" style={{ 
+              background: 'transparent', 
+              color: 'var(--color-primary)', 
+              padding: '1rem 2.5rem', 
+              borderRadius: '8px', 
+              fontSize: '1.05rem', 
+              fontWeight: 600,
+              border: '1px solid var(--color-primary)',
+              cursor: 'pointer',
+              display: 'inline-block',
+              transition: 'all 0.3s ease'
+            }}>
+              Zobacz wszystkie realizacje
+            </Link>
+          </div>
         </AnimatedSection>
       </div>
 

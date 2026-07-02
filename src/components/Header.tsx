@@ -30,22 +30,25 @@ export default function Header() {
         </Link>
         
         <nav className={styles.nav}>
-          {['Strona główna', 'Oferta v', 'Realizacje', 'Cennik', 'O nas', 'Kontakt'].map((item) => {
-            const isOffer = item.includes('v')
-            const text = isOffer ? 'Oferta' : item
-            return (
-              <motion.div key={item} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-                <Link href={`#${text.toLowerCase().replace(' ', '-')}`} className={styles.navLink}>
-                  <span className={text === 'Strona główna' ? styles.activeLink : ''}>{text}</span>
-                  {isOffer && (
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px' }}>
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  )}
-                </Link>
-              </motion.div>
-            )
-          })}
+          {[
+            { label: 'Strona główna', href: '/' },
+            { label: 'Oferta', href: '/#uslugi', isDropdown: true },
+            { label: 'Realizacje', href: '/realizacje' },
+            { label: 'Cennik', href: '/#cennik' },
+            { label: 'O nas', href: '/#o-nas' },
+            { label: 'Kontakt', href: '/#kontakt' }
+          ].map((item) => (
+            <motion.div key={item.label} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+              <Link href={item.href} className={styles.navLink}>
+                <span className={item.href === '/' ? styles.activeLink : ''}>{item.label}</span>
+                {item.isDropdown && (
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px' }}>
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                )}
+              </Link>
+            </motion.div>
+          ))}
         </nav>
 
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
