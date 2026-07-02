@@ -35,10 +35,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} className={styles.badge}>
-            <span className={styles.badgePulse}></span>
-            <span>Nowy standard tworzenia stron</span>
-          </motion.div>
+
           
           <motion.h1 variants={itemVariants} className={styles.title}>
             Tworzymy <br/> <span className="gradient-text">Cyfrowe Doświadczenia</span>

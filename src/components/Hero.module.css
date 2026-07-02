@@ -23,53 +23,6 @@
   align-items: center;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  margin-bottom: 2rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-gray);
-  backdrop-filter: blur(10px);
-}
-
-@media (prefers-color-scheme: light) {
-  .badge {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-}
-
-.badgePulse {
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  position: relative;
-}
-
-.badgePulse::after {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--color-primary);
-  animation: pulse 2s linear infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
 
 .title {
   font-size: clamp(3.5rem, 7vw, 7rem);
